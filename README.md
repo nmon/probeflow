@@ -158,28 +158,28 @@ For more information about nProbe visit: http://www.ntop.org/products/nprobe/
      ```
 
 * Send a test entry locally via nginx:
-```
-$ curl -u {YOUR_API_KEY}: \
-       -XPOST 'http://127.0.0.1:19200/my_index/posts' -d '{
-    "user": "myself",
-    "post_date": "2014-09-24T09:48:41.328Z",
-    "message": "trying out facetflow and nprobe"
-  }'
-```
+     ```
+     $ curl -u {YOUR_API_KEY}: \
+            -XPOST 'http://127.0.0.1:19200/my_index/posts' -d '{
+         "user": "myself",
+         "post_date": "2014-09-24T09:48:41.328Z",
+         "message": "trying out facetflow and nprobe"
+       }'
+     ```
 
 * Drop your indexes in sandbox mode:
-```
-curl -XDELETE 'http://127.0.0.1:19200/my_index/' -u {API_KEY}
-```
+     ```
+     curl -XDELETE 'http://127.0.0.1:19200/my_index/' -u {API_KEY}
+     ```
 
 * Count & Rotate nProbe indexes in your limited sandbox from CRON (scripts/)
-```
-curl -XGET "http://localhost:19200/nprobe-*/_count" -u {YOUR_API_KEY}: -d '{"query": {"match_all": {} } }' -s
-```
+     ```
+     curl -XGET "http://localhost:19200/nprobe-*/_count" -u {YOUR_API_KEY}: -d '{"query": {"match_all": {} } }' -s
+     ```
 
-```
-curl -XDELETE "http://localhost:19200/nprobe-*/" -u {YOUR_API_KEY}:
-```
+     ```
+     curl -XDELETE "http://localhost:19200/nprobe-*/" -u {YOUR_API_KEY}:
+     ```
 
 * If you're parsing syslog lines too, make sure your hosts are time/ntp sycronized
 
