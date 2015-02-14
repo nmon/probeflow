@@ -69,15 +69,13 @@ Edit the elasticsearch parameter in /usr/share/nginx/qbana/config.js:
 
 
 
-----------------
+
 
 <br>
 
 ## ![](http://www.ntop.org/wp-content/uploads/2011/08/nboxLogo.gif) Configuration
 
 
-
-----------------
 
 <br>
 
