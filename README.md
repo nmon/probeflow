@@ -81,10 +81,23 @@ Edit the elasticsearch parameter in /usr/share/nginx/qbana/config.js:
 
 <br>
 
-### nProbe *(dummy template, adjust according to requirements)*
+### nProbe
+
+#### Elasticsearch Export Plugin
+```
+[Export Plugin]
+  --elastic <format>      | Enable export to ElasticSearch
+                          | Format: <index type>;<index name>;<es URL>;<es user>:<es pwd>
+                          | Example: --elastic "nProbe;nprobe;http://localhost:9200/_bulk;user:pwd"
+```
+
+
+#### nProbe template and options
+
 ```
 $ nprobe -T "%IPV4_SRC_ADDR %L4_SRC_PORT %IPV4_DST_ADDR %L4_DST_PORT %PROTOCOL %IN_BYTES %OUT_BYTES %FIRST_SWITCHED %LAST_SWITCHED %IN_PKTS %OUT_PKTS %IP_PROTOCOL_VERSION %APPLICATION_ID %L7_PROTO_NAME %ICMP_TYPE %SRC_IP_COUNTRY %DST_IP_COUNTRY %APPL_LATENCY_MS" --redis localhost --elastic "nProbe;nprobe;http://127.0.0.1:9200/_bulk" -b 1 -i any --json-labels -t 30
 ```
+Adjust your template to include/activate any of the available plugins.
 
 ----------------
 
