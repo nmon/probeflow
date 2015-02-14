@@ -1,7 +1,7 @@
 [nProbe v7](www.ntop.org/products/nprobe/) integration with [Facetflow](https://facetflow.com/)
 ================
 
-
+![](http://i.imgur.com/JdA1Zdo.png)
 
 ## ![](http://www.ntop.org/wp-content/uploads/2011/08/nboxLogo.gif) Setup:
 
