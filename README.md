@@ -8,11 +8,11 @@
 In this setup guide, we'll be using:
 
 * nprobe: capturing packets and sending json reports to Facetflow's ES Bulk API *(with basic auth)*
-  * nprobe: "Elasticsearch JSON Export" plugin with direct Bulk insert and indexing functionality
-* qbana: connecting to facetflow w/ user authentication option *(hosted local or remotely)*
+  * nprobe: "Elasticsearch JSON Export" plugin with direct Bulk insert and indexing functionality **
+* qbana: connecting to facetflow w/ user authentication option *(hosted locally or remotely)*
 
 *Note: A free or paid account at [Facetflow](https://facetflow.com/) is required.*
-
+**Note: Requires a PRO license from [ntop.org](http://www.nmon.net/shop/)
 <br>
 
 ## ![](http://www.ntop.org/wp-content/uploads/2011/08/nboxLogo.gif) Installation
@@ -48,11 +48,6 @@ apt-get install pfring nprobe
 *Additional OS download are available at: [http://www.nmon.net/packages/](http://www.nmon.net/packages/)*
 
 
-### Nginx Setup
-```
-apt-get install nginx
-
-```
 ### FacetFlow Setup
 Sign up for a free or paid account/package at [FacetFlow.com](http://www.FacetFlow.com) and obtain your *{API_KEY}* and *{HOST_ID}*
 ```
