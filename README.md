@@ -88,22 +88,28 @@ Edit the elasticsearch parameter in /usr/share/nginx/qbana/config.js:
 [Export Plugin]
   --elastic <format>      | Enable export to ElasticSearch
                           | Format: <index type>;<index name>;<es URL>;<es user>:<es pwd>
-                          | Example: --elastic "nProbe;nprobe;http://localhost:9200/_bulk;user:pwd"
+                          | Example: --elastic "nProbe;nprobe-%Y.%m.%d;http://localhost:9200/_bulk;user:pwd"
 ```
+The index_name parameter supports 
+Assemble your --elastic parameters using your IDs, zones and credentials. Example:
 
+```
+--elastic "nProbe;nProbe-%Y.%m.%d;https://{HOST_ID}.east-us.azr.facetflow.io/_bulk;{API_KEY}"
+```
 
 #### nProbe template and options
 
 ```
-$ nprobe -T "%IPV4_SRC_ADDR %L4_SRC_PORT %IPV4_DST_ADDR %L4_DST_PORT %PROTOCOL %IN_BYTES %OUT_BYTES %FIRST_SWITCHED %LAST_SWITCHED %IN_PKTS %OUT_PKTS %IP_PROTOCOL_VERSION %APPLICATION_ID %L7_PROTO_NAME %ICMP_TYPE %SRC_IP_COUNTRY %DST_IP_COUNTRY %APPL_LATENCY_MS" --redis localhost --elastic "nProbe;nprobe;http://127.0.0.1:9200/_bulk" -b 1 -i any --json-labels -t 30
+$ nprobe -T "%IPV4_SRC_ADDR %L4_SRC_PORT %IPV4_DST_ADDR %L4_DST_PORT %PROTOCOL %IN_BYTES %OUT_BYTES %FIRST_SWITCHED %LAST_SWITCHED %IN_PKTS %OUT_PKTS %IP_PROTOCOL_VERSION %APPLICATION_ID %L7_PROTO_NAME %ICMP_TYPE %SRC_IP_COUNTRY %DST_IP_COUNTRY %APPL_LATENCY_MS" --redis localhost --elastic "nProbe;nprobe;https://{HOST_ID}.east-us.azr.facetflow.io/_bulk;{API_KEY}" -b 1 -i any --json-labels -t 30
 ```
-Adjust your template to include/activate any of the available plugins.
+Adjust your template to include/activate any of the available [plugins](http://www.ntop.org/products/nprobe/).
 
 ----------------
 
 ## ![](http://www.ntop.org/wp-content/uploads/2011/08/nboxLogo.gif) You're Done! 
 
-nProbe template metrics will now appear in QBana
+Congratulations! 
+nProbe indices should be created on your cluster, and data served to your QBana/Kibana instance.
 
 ![](http://i.imgur.com/9gXTKCd.png)
 
