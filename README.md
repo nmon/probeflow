@@ -49,7 +49,9 @@ apt-get install pfring nprobe
 
 
 ### FacetFlow Setup
-Sign up for a free or paid account/package at [FacetFlow.com](http://www.FacetFlow.com) and obtain your *{API_KEY}* and *{HOST_ID}*
+Sign up for a free or paid account/package at [FacetFlow.com](http://www.FacetFlow.com) and obtain:
+  * *{API_KEY}* 
+  * *{HOST_ID}*
 ```
 The {API_KEY} will be used to authenticate both QBana users and other Clients reading/inserting data.
 ```
