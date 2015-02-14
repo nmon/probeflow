@@ -10,6 +10,7 @@ In this setup guide, we'll be using:
 * nprobe: capturing packets and sending json reports to Facetflow's ES Bulk API *(with basic auth)*
   * nprobe: "Elasticsearch JSON Export" plugin with direct Bulk insert and indexing functionality **
 * qbana: connecting to facetflow w/ user authentication option *(hosted locally or remotely)*
+* facetflow: hosted elasticsearch cluster and management *(free and paid plans available)*
 
 ```* Note: A free or paid account at [Facetflow](https://facetflow.com/) is required.<br/>``` <br/>
 ```** Note: Requires a PRO license from [ntop.org](http://www.nmon.net/shop/)```
@@ -124,7 +125,39 @@ For more information about nProbe visit: http://www.ntop.org/products/nprobe/
 
 ### Quick Tips
 
-* Send a test entry locally:
+* Use NGINX to Proxy Requests to Facetflow *(optional)*
+
+     Nginix can be used to receive and forward local http traffic and manage your Facetflow instance using https and passing along the basic authentication via a local proxy.
+     
+     Paste and Edit the following configuration in /etc/nginx/sites-enabled/facetflow_fwd.conf
+     ```
+     server {
+         listen       19200;
+         server_name  {YOUR_HOST_ID}.facetflow.io;lo
+     
+         error_log   facetflow-errors.log;
+         access_log  facetflow.log;
+     
+         location / {
+     
+           # Deny access to Cluster API
+           if ($request_filename ~ "_cluster") {
+             return 403;
+             break;
+           }
+           # Pass requests to ElasticSearch
+           proxy_pass https://{YOUR_HOST_ID}.facetflow.io;
+           proxy_redirect off;
+           proxy_set_header  Host $proxy_host;
+           # Route all requests to authorized user's own index
+           #rewrite  ^(.*)$ $1  break;
+           rewrite_log on;
+         }
+     }
+     
+     ```
+
+* Send a test entry locally via nginx:
 ```
 $ curl -u {YOUR_API_KEY}: \
        -XPOST 'http://127.0.0.1:19200/my_index/posts' -d '{
@@ -154,37 +187,7 @@ curl -XDELETE "http://localhost:19200/nprobe-*/" -u {YOUR_API_KEY}:
 
 * In Facetflow, generate custom keys for your agents/applications and use the ACL settings to improve security
 
-* Use NGINX to Proxy Requests to Facetflow *(optional)*
 
-Nginix can be used to receive and forward local http traffic to your Facetflow instance using https and passing along the basic authentication.
-
-Paste and Edit the following configuration in /etc/nginx/sites-enabled/facetflow_fwd.conf
-```
-server {
-    listen       19200;
-    server_name  {YOUR_HOST_ID}.facetflow.io;lo
-
-    error_log   facetflow-errors.log;
-    access_log  facetflow.log;
-
-    location / {
-
-      # Deny access to Cluster API
-      if ($request_filename ~ "_cluster") {
-        return 403;
-        break;
-      }
-      # Pass requests to ElasticSearch
-      proxy_pass https://{YOUR_HOST_ID}.facetflow.io;
-      proxy_redirect off;
-      proxy_set_header  Host $proxy_host;
-      # Route all requests to authorized user's own index
-      #rewrite  ^(.*)$ $1  break;
-      rewrite_log on;
-    }
-}
-
-```
 
 ------------
 <br>
