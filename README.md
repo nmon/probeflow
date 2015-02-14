@@ -11,8 +11,8 @@ In this setup guide, we'll be using:
   * nprobe: "Elasticsearch JSON Export" plugin with direct Bulk insert and indexing functionality **
 * qbana: connecting to facetflow w/ user authentication option *(hosted locally or remotely)*
 
-\* Note: A free or paid account at [Facetflow](https://facetflow.com/) is required.<br/>
-** Note: Requires a PRO license from [ntop.org](http://www.nmon.net/shop/)
+```* Note: A free or paid account at [Facetflow](https://facetflow.com/) is required.<br/>```
+```** Note: Requires a PRO license from [ntop.org](http://www.nmon.net/shop/)```
 <br>
 
 ## ![](http://www.ntop.org/wp-content/uploads/2011/08/nboxLogo.gif) Installation
